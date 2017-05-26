@@ -73,7 +73,7 @@ class CurlInitializer
         $params += $extra;
         $params = RequestParamValidator::validateJsonParams($params);
         $headers = ['Content-Type: application/json'];
-        $headers += $this->credential->getOAuthHeaders($url, 'POST', $params);
+        $headers = array_merge($headers, $this->credential->getOAuthHeaders($url, 'POST', []));
         curl_setopt_array($ch, array_replace($this->options, [
             CURLOPT_URL            => $url,
             CURLOPT_HTTPHEADER     => $headers,
