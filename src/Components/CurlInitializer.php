@@ -66,6 +66,25 @@ class CurlInitializer
         return $ch;
     }
 
+    public function postJson($endpoint, array $params)
+    {
+        $ch = curl_init();
+        list($url, $extra) = UrlNormalizer::twitterSplitUrlAndParameters($endpoint);
+        $params += $extra;
+        $params = RequestParamValidator::validateJsonParams($params);
+        $headers = ['Content-Type: application/json'];
+        $headers += $this->credential->getOAuthHeaders($url, 'POST', $params);
+        curl_setopt_array($ch, array_replace($this->options, [
+            CURLOPT_URL            => $url,
+            CURLOPT_HTTPHEADER     => $headers,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HEADER         => true,
+            CURLOPT_POST           => true,
+            CURLOPT_POSTFIELDS     => json_encode($params),
+        ]));
+        return $ch;
+    }
+
     public function getOut($endpoint, array $params)
     {
         $ch = curl_init();

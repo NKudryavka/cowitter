@@ -46,6 +46,18 @@ class RequestParamValidator
         return $params;
     }
 
+    public static function validateJsonParams(array $params)
+    {
+        foreach ($params as $key => $value) {
+            if ($value === null) {
+                unset($params[$key]);
+                continue;
+            }
+            // what should be tested?
+        }
+        return $params;
+    }
+
     public static function isGenerator(callable $callable)
     {
         if (is_string($callable) && strpos($callable, '::')) {

@@ -47,6 +47,11 @@ trait RequestorTrait
         return CurlExecutor::execDecoded($this->getInternalCurl()->postMultipart($endpoint, $params), $return_response_object);
     }
 
+    public function postJson($endpoint, array $params = [], $return_response_object = false)
+    {
+        return CurlExecutor::execDecoded($this->getInternalCurl()->postJson($endpoint, $params), $return_response_object);
+    }
+
     public function streamingAsync($endpoint, callable $event_handler, array $params = [], callable $header_response_handler = null)
     {
         $handler = new StreamHandler($header_response_handler, $event_handler);

@@ -108,6 +108,7 @@ interface ClientInterface
     public function get($endpoint, array $params = [], $return_response_object = false); // : \stdClass|array|MediaInterface|ResponseInterface
     public function post($endpoint, array $params = [], $return_response_object = false); // : \stdClass|ResponseInterface
     public function postMultipart($endpoint, array $params = [], $return_response_object = false); // : \stdClass|ResponseInterface
+    public function postJson($endpoint, array $params = [], $return_response_object = false);
     public function getAsync($endpoint, array $params = [], $return_response_object = false); // : \Generator<\stdClass|array|MediaInterface|ResponseInterface
     public function postAsync($endpoint, array $params = [], $return_response_object = false); // : \Generator<\stdClass|ResponseInterface>
     public function postMultipartAsync($endpoint, array $params = [], $return_response_object = false); // : \Generator<\stdClass|ResponseInterface>
